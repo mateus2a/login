@@ -8,12 +8,13 @@ const SessionController = require('./app/controllers/SessionController');
 const UserController = require('./app/controllers/UserController');
 
 routes.post('/authenticate', SessionController.store);
+routes.post('/forgot_password', UserController.edit);
+routes.post('/reset_password', UserController.update);
 
 routes.use(authMiddleware);
 
 routes.get('/users', UserController.index);
 routes.post('/users', UserController.store);
-routes.put('/users/:id', UserController.update);
 routes.delete('/users/:id', UserController.destroy);
 
 module.exports = routes;
