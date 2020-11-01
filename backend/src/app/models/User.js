@@ -1,4 +1,6 @@
+/* eslint-disable func-names */
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const mongoosePaginate = require('mongoose-paginate');
 
 const UserSchema = new mongoose.Schema({
@@ -21,6 +23,13 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+});
+
+UserSchema.pre('save', async function (next) {
+  const hash = await bcrypt.hash(this.password, 10);
+  this.password = hash;
+
+  next();
 });
 
 UserSchema.plugin(mongoosePaginate);

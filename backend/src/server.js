@@ -13,6 +13,7 @@ mongoose.connect('mongodb://localhost/login', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
+  useFindAndModify: false,
 });
 
 requireDir('./app/models');
